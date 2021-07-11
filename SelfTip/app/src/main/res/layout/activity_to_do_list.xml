@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".toDoList"
+    android:orientation="vertical"
+    >
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:id="@+id/todo_list_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/back"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="999"
+            android:text="待办事项" />
+        <ImageView
+            android:id="@+id/todo_list_new"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/suggest"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            />
+    </TableRow>
+    <ListView
+        android:id="@+id/todo_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>

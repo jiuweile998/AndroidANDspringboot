@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户信息</title>
+<script src="jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+ 	   type : 'POST',
+ 	   url : 'http://localhost:8080/userinfoimp',
+ 	   data : {
+ 	   },
+ 	   dataType : 'json',
+ 	   success : function(data) {
+ 		 var listInfo = "<table align=\"center\" border=1>"
+ 		 +"<tr>"+"<td>用户id</td>"+
+ 		"<td>用户姓名</td>"+
+ 		"<td>用户密码</td>"+
+ 		"<td>用户email</td>"+
+ 		"<td>用户电话</td>"+
+ 		"<td>用户体重</td>"+
+ 		"<td>用户身高</td>"+
+ 		"<td>用户bmi</td>"+
+ 		"<td>用户血型</td>"+
+ 		"<tr>"
+ 		 ;
+ 		    for (var i  in data) {
+ 		    var datas=data[i];
+ 		 	listInfo+=
+ 		 	"<tr>"+
+ 		 	"<td>"+datas.mid+"</td>"+
+ 			"<td>"+datas.muser+"</td>"+
+ 			"<td>"+datas.mpsd+"</td>"+
+ 			"<td>"+datas.memail+"</td>"+
+ 			"<td>"+datas.mphone+"</td>"+
+ 			"<td>"+datas.weight+"</td>"+
+ 			"<td>"+datas.mheight+"</td>"+
+ 			"<td>"+datas.mbmi +"</td>"+
+ 			"<td>"+datas.mblood+"</td>"+
+ 			"<td><button onclick="+"mod("+datas.mid
+ 			+")>修改</button></td>"+
+ 			"<td><button onclick="+"del("+datas.mid
+ 			+")>删除</button></td>"+
+ 			 "</tr>"
+ 		 }
+ 		 listInfo+="</table>"
+ 		 $("#List").append(listInfo);
+ 	   },
+ 	   error : function() {
+ 		   window.alert("失败")
+ 	   }
+ })
+ 
+ 
+})
+ function del(reg) {
+ $.ajax({
+ 	   type : 'GET',
+ 	   url : 'http://localhost:8080/delete',
+ 	   data : {
+ 	   id:reg
+ 	   },
+ 	   dataType : 'text',
+ 	   success : function(data) {
+ 	   alert(data)
+ 	   window.location.replace("http://localhost:8080/userinfo");
+ 
+ },
+ error : function() {
+ 		   window.alert("失败")
+ 	   }
+ 	  })
+ 	  }
+function mod(reg) {
+	var url = "http://localhost:8080/users?index="+reg;
+    window.open(url)
+	
+}
+</script>
+</head>
+<body>
+  <div id="List">
+  </div>
+</body>
+</html>

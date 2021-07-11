@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clickable="false"
+    android:focusable="false"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    >
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
+        <TextView
+            android:layout_height="wrap_content"
+            android:textIsSelectable="false"
+            android:textSize="18sp"
+            android:id="@+id/Schedule_todoname"
+            android:layout_marginLeft="5dp"
+            android:text="123"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:textIsSelectable="false"
+            android:textSize="18sp"
+            android:id="@+id/Schedule_date"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="123"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:textIsSelectable="false"
+            android:textSize="18sp"
+            android:id="@+id/Schedule_isdone"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="123"
+            />
+        <ImageView
+            android:id="@+id/Schedule_clear"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/clear"/>
+    </TableRow>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textIsSelectable="false"
+        android:textSize="14sp"
+        android:id="@+id/Schedule_detail"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:text="123"
+        />
+</LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>  
+<meta charset="utf-8" />  
+<title>WebSocket</title>  
+<script src="jquery-3.6.0.min.js"></script>
+<script language="javascript"type="text/javascript">  
+var el,elURL,url,para,result,arr;
+el = document.getElementById("p1");
+elURL= window.location.search;//获取get请求的参数 获取到数据，是以？传过来的值 “?hid=lemon&seth=seth”
+result={};//存储对象
+arr=[];
+ //通过解析字符串，获取确定的数据。
+ function paraURL(url){
+   //从第二个字符开始截取，获取到第二个开始后面所有的字符
+   //url=url.substr(1);或url=url.substring(1);同下面这个
+   url= url.split("?")[1];//hid=lemon&seth=seth
+   para =url.split("&");  //分割字符串  --> 产生字符串数组
+   //遍历数组中的每一个元素
+  for(var i=0;i<para.length;i++){
+      arr = para[i].split('=');
+      var name=arr[0];
+      var value=arr[1];
+//unescape加密
+     //result[name]=unescape(value);
+
+result[name]=encodeURI(value); //解决中文乱码问题
+  }
+      /* 同上
+        para.forEach(function(v){
+            arr=v.split("=");
+            var name=arr[0];
+            var value = arr[1];
+            result[name]=value;
+        })
+        return result;
+     */
+  return result;
+ }
+ var res=paraURL(elURL)
+
+    var wsUri ="ws://127.0.0.1:8080/websocket/"+res.index; 
+    var output;  
+    function btn(){
+    	var inputDom = document.getElementById("text");//找到元素，假如给input元素加了id属性 且 值为:text
+    	var text = inputDom.value; //获取元素值
+    	doSend(text); 
+    }
+    function init() { 
+        output = document.getElementById("output"); 
+        testWebSocket(); 
+    }  
+ 
+    function testWebSocket() { 
+        websocket = new WebSocket(wsUri); 
+        websocket.onopen = function(evt) { 
+            onOpen(evt) 
+        }; 
+        //websocket.onclose = function(evt) { 
+            //onClose(evt) 
+        //}; 
+        websocket.onmessage = function(evt) { 
+            onMessage(evt) 
+        }; 
+        websocket.onerror = function(evt) { 
+            onError(evt) 
+        }; 
+    }  
+ 
+    function onOpen(evt) { 
+        writeToScreen("CONNECTED"); 
+        doSend("{context:\"subscribe\"}"); 
+    }  
+ 
+    function onClose(evt) { 
+        writeToScreen("DISCONNECTED"); 
+    }  
+ 
+    function onMessage(evt) { 
+        writeToScreen('<span style="color: blue;">RESPONSE: '+ evt.data+'</span>'); 
+       // websocket.close(); 
+    }  
+ 
+    function onError(evt) { 
+        writeToScreen('<span style="color: red;">ERROR:</span> '+ evt.data); 
+    }  
+ 
+    function doSend(message) { 
+        writeToScreen("SENT: " + message);  
+        websocket.send(message); 
+    }  
+ 
+    function writeToScreen(message) { 
+        var pre = document.createElement("p"); 
+        pre.style.wordWrap = "break-word"; 
+        pre.innerHTML = message; 
+        output.appendChild(pre); 
+    }  
+ 
+    
+    window.addEventListener("load", init, false);  
+</script>  
+<div align="center">
+<input  type="text" name="text" id="text"><br>
+<button id="send" onclick="btn()">发送</button> <button onclick="window.location.href='/userinfo'" >用户信息</button> 
+</div>
+<div align="center"><div id="output"></div> </div>
+ 
+</html>

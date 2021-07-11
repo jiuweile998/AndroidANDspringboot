@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+    function submit(){
+    	var username=document.getElementById("username").value;
+    	var password=document.getElementById("password").value;
+    	var phone=document.getElementById("phone").value;
+    	var email=document.getElementById("email").value;
+    	$.ajax({
+    		type: "POST",
+    		url: 'http://localhost:8080/RegLet',
+    		data: {
+    			username:username,
+    			password:password,
+    			phone:phone,
+    			email:email
+    		},
+    		dataType: "text",
+    		success: function (data) {
+    			if(data.split("Succss")){
+    				alert("注册成功")
+    				var url = "http://localhost:8080/Login";
+    			        window.open(url)
+    			}else{
+    				alert("输入信息有误")
+    			}
+    			
+    		},
+    		error: function(){
+    			alert("错误")
+    		}
+    		});
+    }
+    </script>
+     <style>
+            html{
+                width:100% ;
+				height: 100% ;
+				background-image: url(back.png);
+				background-repeat: no-repeat;
+				background-size:  100% 100%;
+				vertical-align:middle;
+            }
+            div{
+ 			 width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+            }
+        </style>
+</head>
+<body>
+<div>
+    请输入姓名:<input  type="text" id="username" name = "username"> <br>
+    请输入密码：<input type="password" name="password" id="password"><br>
+    请输入手机号：<input type="text" name="phone" id="phone"><br>
+    请输入e-mail：<input type="text" name="email" id="email"><br>
+    <input type="submit" onclick="submit()" name="submit" value="提交">
+</div>
+</body>
+</html>
